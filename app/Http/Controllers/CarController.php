@@ -7,6 +7,7 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
+    private $columns =['title', 'description', 'published'];
     /**
      * Display a listing of the resource.
      */
@@ -35,16 +36,21 @@ class CarController extends Controller
       //  $cars->published = 1;
       //  $cars->save();
       //  return 'Data added successfully';
-        $cars = new Car();
-        $cars->title = $request->title;
-        $cars->description = $request->description;
-        if(isset($request->published)){
-            $cars->published = 1;
-        }else{
-            $cars->published = 0;
-        }
-        $cars->save();
-        return "data added successfully";
+      //  $cars = new Car();
+      //  $cars->title = $request->title;
+      //  $cars->description = $request->description;
+      //  if(isset($request->published)){
+      //      $cars->published = 1;
+      //  }else{
+      //      $cars->published = 0;
+      //  }
+      //  $cars->save();
+      //  return "data added successfully";
+      //session 5
+       $data = $request->only($this->columns);
+       $data['published'] = isset($request->published);
+       Car::create($data);
+       return redirect('cars');
     }
 
     /**
@@ -52,7 +58,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('showCar', compact('car'));
     }
 
     /**
@@ -60,7 +67,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        return view('updateCar', compact('car'));
+        
     }
 
     /**
@@ -68,7 +77,10 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $data = $request->only($this->columns);
+       $data['published'] = isset($request->published);
+       Car::where('id', $id)->update($data);
+       return redirect('cars');
     }
 
     /**

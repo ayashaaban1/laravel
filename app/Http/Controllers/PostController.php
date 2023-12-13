@@ -7,12 +7,14 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    private $columns =['postTitle', 'description', 'author', 'published'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Post::get();
+        return view('posts', compact('posts'));
     }
 
     /**
@@ -38,7 +40,8 @@ class PostController extends Controller
             $post->published = 0;
         }
         $post->save();
-        return "data added successfully";
+        // return "data added successfully";
+        return redirect('posts');
     
     }
 
@@ -55,7 +58,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('updatepost', compact('post'));
     }
 
     /**
@@ -63,7 +67,10 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $data = $request->only($this->columns);
+       $data['published'] = isset($request->published);
+       Post::where('id', $id)->update($data);
+       return redirect('posts');
     }
 
     /**

@@ -11,31 +11,21 @@
 <body>
 @include('includes.nav')
 <div class="container">
-  <h2>cars list</h2>            
+  <h2>posts list</h2>            
   <table class="table table-hover">
     <thead>
       <tr>
         <th>title</th>
-        <th>Description</th>
-        <th>published</th>
+        <th>created_at</th>
         <th>Edit</th>
-        <th>Show</th>
       </tr>
     </thead>
     <tbody>
-     @foreach($cars as $car)   
+     @foreach($posts as $p)   
       <tr>
-        <td>{{$car->title}}</td>
-        <td>{{$car->description}}</td>
-        <td>
-            @if($car->published)
-                Yes
-            @else
-                No
-            @endif
-        </td>
-        <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
-        <td><a href="showCar/{{ $car->id }}">Show</a></td>
+        <td>{{$p->postTitle}}</td>
+        <td>{{$p->created_at}}</td>
+        <td><a href="editpost/{{ $p->id }}">edit</a></td>
       </tr>
       @endforeach
     </tbody>

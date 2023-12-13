@@ -119,11 +119,18 @@ Route::get('data', [FormController::class, 'data'])->name('data');
 //session 4
 //store data into car table
 //Route::get('storecar', [CarController::class, 'store']);
-Route::get('createcar', [CarController::class, 'create']);
+Route::get('createcar', [CarController::class, 'create'])->name('createcar');
 Route::post('storecar', [CarController::class, 'store'])->name('storecar');
-Route::get('cars', [CarController::class, 'index']);
+Route::get('cars', [CarController::class, 'index'])->name('cars');
 //task4
-Route::get('addpost', [PostController::class, 'create']);
+Route::get('addpost', [PostController::class, 'create'])->name('addpost');
 Route::post('storepost', [PostController::class, 'store'])->name('storepost');
-
+//session 5
+Route::get('updateCar/{id}', [CarController::class, 'edit']);
+Route::put('update/{id}', [CarController::class, 'update'])->name('update');
+Route::get('showCar/{id}', [CarController::class, 'show'])->name('showCar');
+//task 5
+Route::get('posts', [PostController::class, 'index'])->name('posts');
+Route::get('editpost/{id}', [PostController::class, 'edit']);
+Route::put('update/{id}', [PostController::class, 'update'])->name('update');
 

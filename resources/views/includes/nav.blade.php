@@ -1,13 +1,13 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand" href="#">cars</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="cars">Home</a></li>
-      <li><a href="createcar">insertcar</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li class="active"><a href="{{ route('cars') }}">car list</a></li>
+      <li><a href="{{ route('createcar') }}">add car</a></li>
+      <li><a href="{{ route('posts') }}">Post list </a></li>
+      <li><a href="{{ route('addpost') }}">add post </a></li>
     </ul>
   </div>
 </nav>
