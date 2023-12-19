@@ -18,6 +18,7 @@
         <th>title</th>
         <th>created_at</th>
         <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td>{{$p->postTitle}}</td>
         <td>{{$p->created_at}}</td>
         <td><a href="editpost/{{ $p->id }}">edit</a></td>
+        <td><a href="deletePost/{{ $p->id }}"onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
       </tr>
       @endforeach
     </tbody>

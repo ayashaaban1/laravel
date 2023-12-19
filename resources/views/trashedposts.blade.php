@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Trashedposts</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,33 +11,23 @@
 <body>
 @include('includes.nav')
 <div class="container">
-  <h2>cars list</h2>            
+  <h2>trashed posts list</h2>            
   <table class="table table-hover">
     <thead>
       <tr>
         <th>title</th>
-        <th>Description</th>
-        <th>published</th>
-        <th>Edit</th>
-        <th>Show</th>
+        <th>created_at</th>
         <th>Delete</th>
+        <th>Restore</th>
       </tr>
     </thead>
     <tbody>
-     @foreach($cars as $car)   
+     @foreach($posts as $p)   
       <tr>
-        <td>{{$car->title}}</td>
-        <td>{{$car->description}}</td>
-        <td>
-            @if($car->published)
-                Yes
-            @else
-                No
-            @endif
-        </td>
-        <td><a href="updateCar/{{ $car->id }}">Edit</a></td>
-        <td><a href="showCar/{{ $car->id }}">Show</a></td>
-        <td><a href="deleteCar/{{ $car->id }}"onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+        <td>{{$p->postTitle}}</td>
+        <td>{{$p->created_at}}</td>
+        <td><a href="forceDeletePost/{{ $p->id }}"onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+        <td><a href="restorePost/{{ $p->id }}">Restore</a></td>
       </tr>
       @endforeach
     </tbody>

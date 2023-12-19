@@ -132,5 +132,14 @@ Route::get('showCar/{id}', [CarController::class, 'show'])->name('showCar');
 //task 5
 Route::get('posts', [PostController::class, 'index'])->name('posts');
 Route::get('editpost/{id}', [PostController::class, 'edit']);
-Route::put('update/{id}', [PostController::class, 'update'])->name('update');
-
+Route::put('updatepost/{id}', [PostController::class, 'update'])->name('updatepost');
+//session 6
+Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
+Route::get('trashed', [CarController::class, 'trashed'])->name('trashed');
+Route::get('forceDelete/{id}', [CarController::class, 'forceDelete'])->name('forceDelete');
+Route::get('restoreCar/{id}', [CarController::class, 'restore'])->name('restoreCar');
+//task 6
+Route::get('deletePost/{id}', [PostController::class, 'destroy']);
+Route::get('trashedPost', [PostController::class, 'trashed'])->name('trashedPost');
+Route::get('forceDeletePost/{id}', [PostController::class, 'forceDelete'])->name('forceDeletePost');
+Route::get('restorePost/{id}', [PostController::class, 'restore'])->name('restorePost'); 
