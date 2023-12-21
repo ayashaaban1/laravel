@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
     private $columns =['title', 'description', 'published'];
     /**
      * Display a listing of the resource.
@@ -48,11 +50,14 @@ class CarController extends Controller
       //  return "data added successfully";
       //session 5
       /// $data = $request->only($this->columns);
+      $messages = $this->messages();
       $data = $request->validate([
-        'title'=>'required|string|max:50',
-        'description'=>'required|string',
-      ]);
-      
+          'title'=>'required|string|max:50',
+          'description'=>'required|string',
+          'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+       $fileName = $this->uploadFile($request->image, 'assets/images');    
+       $data['image'] = $fileName;
        $data['published'] = isset($request->published);
        Car::create($data);
        return redirect('cars');
@@ -82,10 +87,25 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       $data = $request->only($this->columns);
+      // $data = $request->only($this->columns);
+      $messages = $this->messages();
+      $data = $request->validate([
+        'title'=>'required|string|max:50',
+        'description'=>'required|string',
+        'image' => 'mimes:png,jpg,jpeg|max:2048',
+       ],$messages);
+       $image = $request->file('image');
+       if($image){
+       $fileName = $this->uploadFile($image, 'assets/images');    
+       $data['image'] = $fileName;
+       }else{
+        $car= Car::findOrFail($id);
+        $data['image']=$car->image;
+       }
        $data['published'] = isset($request->published);
        Car::where('id', $id)->update($data);
        return redirect('cars');
+      
     }
 
     /**
@@ -120,4 +140,17 @@ class CarController extends Controller
         Car::where('id', $id)->restore();
         return redirect('cars');
     }
+    
+    public function messages()
+    {
+        return[
+            'title.required'=>'العنوان مطلوب',
+            'title.string'=>'Should be string',
+            'description.required'=> 'should be text',
+            'image.required'=> 'Please be sure to select an image',
+            'image.mimes'=> 'Incorrect image type',
+            'image.max'=> 'Max file size exceeded',
+            ]; 
+    }
+
 }

@@ -31,9 +31,9 @@ Route::get('food',function (){
 
 Route::prefix('lar')->group(function () {
 
-    Route::get('/', function () {
-        return view('test');
-    });    
+  //  Route::get('/', function () {
+  //      return view('test');
+  //  });    
         
     Route::get('test', function () {
         return 'welcome to my first laravel website';
@@ -143,3 +143,11 @@ Route::get('deletePost/{id}', [PostController::class, 'destroy']);
 Route::get('trashedPost', [PostController::class, 'trashed'])->name('trashedPost');
 Route::get('forceDeletePost/{id}', [PostController::class, 'forceDelete'])->name('forceDeletePost');
 Route::get('restorePost/{id}', [PostController::class, 'restore'])->name('restorePost'); 
+///session 7
+Route::get('testimage',function (){
+    return view('test');
+});
+Route::get('image',function (){
+    return view('image');
+});
+Route::post('imageUpload', [ExampleController::class,'upload'])->name('imageUpload');

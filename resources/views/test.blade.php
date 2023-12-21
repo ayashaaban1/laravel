@@ -9,5 +9,6 @@
 <body>
   <h1> myfirst blade file</h1>
   <h2> aya</h2>
+  <img src="{{ asset('assets/images/Penguins.jpg')}}" alt="">
 </body>
 </html>
