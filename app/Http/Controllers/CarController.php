@@ -88,24 +88,40 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
       // $data = $request->only($this->columns);
+      //$messages = $this->messages();
+      //$data = $request->validate([
+      //  'title'=>'required|string|max:50',
+      //  'description'=>'required|string',
+      //  'image' => 'mimes:png,jpg,jpeg|max:2048',
+      // ],$messages);
+      // $image = $request->file('image');
+      // if($image){
+      // $fileName = $this->uploadFile($image, 'assets/images');    
+      // $data['image'] = $fileName;
+      // unlink("assets/images/" . $request->oldImage);
+
+       //}else{
+       // $car= Car::findOrFail($id);
+       // $data['image']=$car->image;
+       //}
+       //$data['published'] = isset($request->published);
+      // Car::where('id', $id)->update($data);
+      // return redirect('cars');
       $messages = $this->messages();
-      $data = $request->validate([
-        'title'=>'required|string|max:50',
-        'description'=>'required|string',
-        'image' => 'mimes:png,jpg,jpeg|max:2048',
-       ],$messages);
-       $image = $request->file('image');
-       if($image){
-       $fileName = $this->uploadFile($image, 'assets/images');    
-       $data['image'] = $fileName;
-       }else{
-        $car= Car::findOrFail($id);
-        $data['image']=$car->image;
-       }
-       $data['published'] = isset($request->published);
-       Car::where('id', $id)->update($data);
-       return redirect('cars');
-      
+        $data = $request->validate([
+             'title'=>'required|string|max:50',
+             'description'=> 'required|string',
+             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            ], $messages);
+
+            if($request->hasFile('image')){
+                $fileName = $this->uploadFile($request->image, 'assets/images');    
+                $data['image'] = $fileName;
+            }
+            
+            $data['published'] = isset($request->published);
+            Car::where('id', $id)->update($data);
+            return redirect('cars');
     }
 
     /**
