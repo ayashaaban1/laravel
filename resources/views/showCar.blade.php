@@ -11,5 +11,6 @@
     <h5>Updated at: {{ $car->updated_at }}</h5>
     <p>Description: {{ $car->description }}</p>
     <p>{{ $car->published? "Published" : "Not Published" }}</p>
+    <p>category :{{ $car->category->cat_name }}</p>
 </body>
 </html>
