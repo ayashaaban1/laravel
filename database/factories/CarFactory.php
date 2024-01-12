@@ -20,7 +20,8 @@ class CarFactory extends Factory
             'title' => fake()->company(),
             'description' => fake()->sentence(),
             'published' => fake()->numberBetween(0, 1),
-            'image' => fake()->imageUrl(640, 480, 'animals', true),
+           // 'image' => fake()->imageUrl(640, 480, 'animals', true),
+            'image' => fake()->image("public/assets/images",640, 480, 'animals', false),
             'category_id' => fake()->numberBetween(1, 10),
         ];
     }

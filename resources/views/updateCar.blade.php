@@ -42,7 +42,8 @@
       <label for="category">Category:</label>
       <select name="category_id" id="">
         @foreach($categories as $category)
-        <option value="{{ $category->id }}"{{ $car->category_id == $category->id ? 'selected' : '' }}>{{ $category->cat_name }}</option>
+       <!-- <option value="{{ $category->id }}"{{ $car->category_id == $category->id ? 'selected' : '' }}>{{ $category->cat_name }}</option> -->
+        <option value="{{ $category->id }}"@selected($category->id == $car->category_id)>{{ $category->cat_name }}</option>
         @endforeach
       </select>
       @error('category_id')

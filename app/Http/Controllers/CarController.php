@@ -111,7 +111,7 @@ class CarController extends Controller
        //$data['published'] = isset($request->published);
       // Car::where('id', $id)->update($data);
       // return redirect('cars');
-      $messages = $this->messages();
+        $messages = $this->messages();
         $data = $request->validate([
              'title'=>'required|string|max:50',
              'description'=> 'required|string',

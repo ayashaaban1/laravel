@@ -5,6 +5,7 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SendMailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,7 +120,7 @@ Route::get('data', [FormController::class, 'data'])->name('data');
 //session 4
 //store data into car table
 //Route::get('storecar', [CarController::class, 'store']);
-Route::get('createcar', [CarController::class, 'create'])->name('createcar');
+//Route::get('createcar', [CarController::class, 'create'])->name('createcar');
 Route::post('storecar', [CarController::class, 'store'])->name('storecar');
 Route::get('cars', [CarController::class, 'index'])->name('cars');
 //task4
@@ -158,6 +159,23 @@ Route::get('testHome',function (){
 Route::get('404',function (){
     return view('404');
 })->name('404');
-Route::get('contact',function (){
-    return view('contact');
-})->name('contact');
+//Route::get('contact',function (){
+  //  return view('contact');
+//})->name('contact');
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//middleware('verified')
+Route::get('createcar',[CarController::class,'create'])->middleware('verified')->name('createcar');
+//session12
+Route::get('test20', [ExampleController::class, 'createSession']);
+
+///task12
+Route::get('contact', [SendMailController::class, 'index'])->name('contact');
+Route::post('send-mail', [SendMailController::class, 'store'])->name('send-mail');
+
