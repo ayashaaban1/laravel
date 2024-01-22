@@ -171,7 +171,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //middleware('verified')
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
 Route::get('createcar',[CarController::class,'create'])->middleware('verified')->name('createcar');
+    });
+
+
+    
 //session12
 Route::get('test20', [ExampleController::class, 'createSession']);
 

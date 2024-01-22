@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\SampleMail;
+use App\Models\Contact;
 
 class SendMailController extends Controller
 {  
@@ -22,6 +23,7 @@ class SendMailController extends Controller
         'subject'=> 'required',
         'message'=> 'required|min:20|max:100',
        ]);
+       Contact::create($content);
 
       Mail::to('as3957401@gmail.com')->send(new SampleMail($content));
 

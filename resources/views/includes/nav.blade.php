@@ -10,6 +10,8 @@
       <li class="{{Request()->routeIs('addpost')?'active':''}}"><a href="{{ route('addpost') }}">add post </a></li>
       <li class="{{Request()->routeIs('trashed')?'active':''}}"><a href="{{ route('trashed') }}">trashed cars </a></li>
       <li class="{{Request()->routeIs('trashedPost')?'active':''}}"><a href="{{ route('trashedPost') }}">trashed posts </a></li>
+      <li class=""><a href="{{ LaravelLocalization::getLocalizedURL('en') }}">Einglis </a></li>
+      <li class=""><a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">عربي </a></li>
     </ul>
   </div>
 </nav>
